@@ -228,7 +228,7 @@ export default class BlockManager extends Module {
     data = {},
     id = undefined,
     tunes: tunesData = {},
-  }: {tool: string; id?: string; data?: BlockToolData; tunes?: {[name: string]: BlockTuneData}}): Block {
+  }: { tool: string; id?: string; data?: BlockToolData; tunes?: { [name: string]: BlockTuneData } }): Block {
     const readOnly = this.Editor.ReadOnly.isEnabled;
     const tool = this.Editor.Tools.blockTools.get(name);
     const block = new Block({
@@ -275,7 +275,7 @@ export default class BlockManager extends Module {
     index?: number;
     needToFocus?: boolean;
     replace?: boolean;
-    tunes?: {[name: string]: BlockTuneData};
+    tunes?: { [name: string]: BlockTuneData };
   } = {}): Block {
     let newIndex = index;
 
@@ -590,8 +590,8 @@ export default class BlockManager extends Module {
     }
 
     const nodes = this._blocks.nodes,
-        firstLevelBlock = element.closest(`.${Block.CSS.wrapper}`),
-        index = nodes.indexOf(firstLevelBlock as HTMLElement);
+      firstLevelBlock = element.closest(`.${Block.CSS.wrapper}`),
+      index = nodes.indexOf(firstLevelBlock as HTMLElement);
 
     if (index >= 0) {
       return this._blocks[index];
@@ -733,7 +733,7 @@ export default class BlockManager extends Module {
     this._blocks.move(toIndex, fromIndex);
 
     /** Now actual block moved so that current block index changed */
-    this.currentBlockIndex = toIndex;
+    // this.currentBlockIndex = toIndex;
 
     /**
      * Force call of didMutated event on Block movement
