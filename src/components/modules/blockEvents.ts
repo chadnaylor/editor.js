@@ -211,6 +211,9 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keydown
    */
   private enter(event: KeyboardEvent): void {
+    if (document.querySelector('.autocomplete-items>div') != null) {
+      return;
+    }
     const { BlockManager, UI } = this.Editor;
     const currentBlock = BlockManager.currentBlock;
 
@@ -222,9 +225,7 @@ export default class BlockEvents extends Module {
       return;
     }
 
-    if (document.querySelector('.autocomplete-items>div') != null) {
-      return;
-    }
+
 
     /**
      * Opened Toolbars uses Flipper with own Enter handling
@@ -282,6 +283,9 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keydown
    */
   private backspace(event: KeyboardEvent): void {
+    if (document.querySelector('.autocomplete-items>div') != null) {
+      return;
+    }
     const { BlockManager, BlockSelection, Caret } = this.Editor;
     const currentBlock = BlockManager.currentBlock;
     const tool = currentBlock.tool;
