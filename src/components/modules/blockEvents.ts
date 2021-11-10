@@ -222,6 +222,10 @@ export default class BlockEvents extends Module {
       return;
     }
 
+    if (document.querySelector('.autocomplete-items>div') != null) {
+      return;
+    }
+
     /**
      * Opened Toolbars uses Flipper with own Enter handling
      * Allow split block when no one button in Flipper is focused
@@ -401,6 +405,10 @@ export default class BlockEvents extends Module {
       return;
     }
 
+    if (document.querySelector('.autocomplete-items>div') != null) {
+      return;
+    }
+
     /**
      * Close Toolbar and highlighting when user moves cursor
      */
@@ -447,6 +455,11 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keyboard event
    */
   private arrowLeftAndUp(event: KeyboardEvent): void {
+
+    if (document.querySelector('.autocomplete-items>div') != null) {
+      return;
+    }
+
     /**
      * Arrows might be handled on toolbars by flipper
      * Check for Flipper.usedKeys to allow navigate by UP and disallow by LEFT
@@ -506,10 +519,10 @@ export default class BlockEvents extends Module {
    */
   private needToolbarClosing(event: KeyboardEvent): boolean {
     const toolboxItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.Toolbox.opened),
-        blockSettingsItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.BlockSettings.opened),
-        inlineToolbarItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.InlineToolbar.opened),
-        conversionToolbarItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.ConversionToolbar.opened),
-        flippingToolbarItems = event.keyCode === _.keyCodes.TAB;
+      blockSettingsItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.BlockSettings.opened),
+      inlineToolbarItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.InlineToolbar.opened),
+      conversionToolbarItemSelected = (event.keyCode === _.keyCodes.ENTER && this.Editor.ConversionToolbar.opened),
+      flippingToolbarItems = event.keyCode === _.keyCodes.TAB;
 
     /**
      * Do not close Toolbar in cases:
