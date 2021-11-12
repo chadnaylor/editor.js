@@ -54,7 +54,7 @@ export default class UI extends Module<UINodes> {
   public get CSS(): {
     editorWrapper: string; editorWrapperNarrow: string; editorZone: string; editorZoneHidden: string;
     editorLoader: string; editorEmpty: string; editorRtlFix: string;
-    } {
+  } {
     return {
       editorWrapper: 'codex-editor',
       editorWrapperNarrow: 'codex-editor--narrow',
@@ -268,7 +268,7 @@ export default class UI extends Module<UINodes> {
      */
     this.nodes.wrapper = $.make('div', [
       this.CSS.editorWrapper,
-      ...(this.isRtl ? [ this.CSS.editorRtlFix ] : []),
+      ...(this.isRtl ? [this.CSS.editorRtlFix] : []),
     ]);
     this.nodes.redactor = $.make('div', this.CSS.editorZone);
 
@@ -446,6 +446,10 @@ export default class UI extends Module<UINodes> {
    * @param {KeyboardEvent} event - keyboard event
    */
   private backspacePressed(event: KeyboardEvent): void {
+    if (document.querySelector('.autocomplete-items>div') != null) {
+      return;
+    }
+
     const { BlockManager, BlockSelection, Caret } = this.Editor;
 
     /**
@@ -502,6 +506,10 @@ export default class UI extends Module<UINodes> {
    * @param {KeyboardEvent} event - keyboard event
    */
   private enterPressed(event: KeyboardEvent): void {
+    if (document.querySelector('.autocomplete-items>div') != null) {
+      return;
+    }
+
     const { BlockManager, BlockSelection } = this.Editor;
     const hasPointerToBlock = BlockManager.currentBlockIndex >= 0;
 
