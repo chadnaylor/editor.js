@@ -211,7 +211,9 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keydown
    */
   private enter(event: KeyboardEvent): void {
+    console.log('events enter')
     if (document.querySelector('.autocomplete-items>div') != null) {
+      console.log('auto open')
       return;
     }
     const { BlockManager, UI } = this.Editor;
