@@ -506,7 +506,9 @@ export default class UI extends Module<UINodes> {
    * @param {KeyboardEvent} event - keyboard event
    */
   private enterPressed(event: KeyboardEvent): void {
+    console.log('enterPressed')
     if (document.querySelector('.autocomplete-items>div') != null) {
+      console.log('auto open')
       return;
     }
 
