@@ -18367,7 +18367,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "enter",
       value: function enter(event) {
+        console.log('events enter');
+
         if (document.querySelector('.autocomplete-items>div') != null) {
+          console.log('auto open');
           return;
         }
 
