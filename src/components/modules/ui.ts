@@ -446,10 +446,6 @@ export default class UI extends Module<UINodes> {
    * @param {KeyboardEvent} event - keyboard event
    */
   private backspacePressed(event: KeyboardEvent): void {
-    if (document.querySelector('.autocomplete-items>div') != null) {
-      return;
-    }
-
     const { BlockManager, BlockSelection, Caret } = this.Editor;
 
     /**
@@ -506,12 +502,6 @@ export default class UI extends Module<UINodes> {
    * @param {KeyboardEvent} event - keyboard event
    */
   private enterPressed(event: KeyboardEvent): void {
-    console.log('enterPressed')
-    if (document.querySelector('.autocomplete-items>div') != null) {
-      console.log('auto open')
-      return;
-    }
-
     const { BlockManager, BlockSelection } = this.Editor;
     const hasPointerToBlock = BlockManager.currentBlockIndex >= 0;
 
