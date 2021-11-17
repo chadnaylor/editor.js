@@ -452,7 +452,7 @@ export default class UI extends Module<UINodes> {
      * If any block selected and selection doesn't exists on the page (that means no other editable element is focused),
      * remove selected blocks
      */
-    if (BlockSelection.anyBlockSelected && !Selection.isSelectionExists) {
+    if (BlockSelection.anyBlockSelected && !Selection.isSelectionExists && document.querySelector('.autocomplete-items>div') === null) {
       const selectionPositionIndex = BlockManager.removeSelectedBlocks();
 
       Caret.setToBlock(BlockManager.insertDefaultBlockAtIndex(selectionPositionIndex, true), Caret.positions.START);
