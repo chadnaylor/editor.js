@@ -140,6 +140,20 @@ export default class Toolbar extends Module<ToolbarNodes> {
         if (this.Editor.Toolbox.isEmpty) {
           return;
         }
+        const current = this.Editor.BlockManager.currentBlock;
+        const name = I18n.t(I18nInternalNS.toolNames, current.tool.toolbox.title || current.name);
+
+        this.nodes.plusButton.innerHTML = current.tool.toolbox.icon;
+
+        const tooltipContent = $.make('div');
+
+        tooltipContent.appendChild(document.createTextNode(_.capitalize(name)));
+        tooltipContent.appendChild($.make('div', this.CSS.plusButtonShortcut, {
+          textContent: '⇥ Tab',
+        }));
+
+        this.tooltip.onHover(this.nodes.plusButton, tooltipContent);
+
         this.nodes.plusButton.classList.remove(this.CSS.plusButtonHidden);
       },
     };
