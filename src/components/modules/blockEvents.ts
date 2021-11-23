@@ -364,7 +364,7 @@ export default class BlockEvents extends Module {
      *
      * other case will handle as usual ARROW LEFT behaviour
      */
-    if (blockToMerge.name !== targetBlock.name || !targetBlock.mergeable) {
+    if (!blockToMerge.mergeable || !targetBlock.mergeable) {
       /** If target Block doesn't contain inputs or empty, remove it */
       if (targetBlock.inputs.length === 0 || targetBlock.isEmpty) {
         BlockManager.removeBlock(BlockManager.currentBlockIndex - 1);
