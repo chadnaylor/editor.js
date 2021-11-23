@@ -246,7 +246,7 @@ export default class Toolbar extends Module<ToolbarNodes> {
    *                                      with closing Toolbox and Block Settings
    *                                      This flag allows to open Toolbar with Toolbox
    */
-  public open(withBlockActions = true, needToCloseToolbox = true): void {
+  public open(withBlockActions = false, needToCloseToolbox = true): void {
     _.delay(() => {
       this.move(needToCloseToolbox);
       this.nodes.wrapper.classList.add(this.CSS.toolbarOpened);
