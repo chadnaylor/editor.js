@@ -125,7 +125,8 @@ export default class BlockEvents extends Module {
       return;
     }
 
-    const canOpenToolbox = currentBlock.tool.isDefault && currentBlock.isEmpty;
+    // eslint-disable-next-line no-mixed-operators
+    const canOpenToolbox = true || currentBlock.tool.isDefault && currentBlock.isEmpty;
     const conversionToolbarOpened = !currentBlock.isEmpty && ConversionToolbar.opened;
     const inlineToolbarOpened = !currentBlock.isEmpty && !SelectionUtils.isCollapsed && InlineToolbar.opened;
 

@@ -56,9 +56,9 @@ export default class ToolbarAPI extends Module {
     if (canOpenBlockSettings) {
       if (!this.Editor.Toolbar.opened) {
         this.Editor.Toolbar.open(true, false);
-        this.Editor.Toolbar.plusButton.hide();
+        // this.Editor.Toolbar.plusButton.hide();
       }
-      this.Editor.BlockSettings.open();
+      // this.Editor.BlockSettings.open();
     } else {
       this.Editor.BlockSettings.close();
     }
