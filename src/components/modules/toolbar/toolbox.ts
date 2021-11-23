@@ -137,7 +137,7 @@ export default class Toolbox extends Module<ToolboxNodes> {
    * @param {MouseEvent|KeyboardEvent} event - event that activates toolbox button
    * @param {string} toolName - button to activate
    */
-  public toolButtonActivate(event: MouseEvent|KeyboardEvent, toolName: string): void {
+  public toolButtonActivate(event: MouseEvent | KeyboardEvent, toolName: string): void {
     this.insertNewBlock(toolName);
   }
 
@@ -218,7 +218,7 @@ export default class Toolbox extends Module<ToolboxNodes> {
     //   return;
     // }
 
-    const button = $.make('li', [ this.CSS.toolboxButton ]);
+    const button = $.make('li', [this.CSS.toolboxButton]);
 
     button.dataset.tool = tool.name;
     button.innerHTML = toolToolboxSettings.icon;
@@ -231,7 +231,7 @@ export default class Toolbox extends Module<ToolboxNodes> {
     /**
      * Add click listener
      */
-    this.listeners.on(button, 'click', (event: KeyboardEvent|MouseEvent) => {
+    this.listeners.on(button, 'click', (event: KeyboardEvent | MouseEvent) => {
       this.toolButtonActivate(event, tool.name);
     });
 
@@ -340,31 +340,35 @@ export default class Toolbox extends Module<ToolboxNodes> {
     const { BlockManager, Caret } = this.Editor;
     const { currentBlock } = BlockManager;
 
-    const newBlock = BlockManager.insert({
-      tool: toolName,
-      replace: currentBlock.isEmpty,
-    });
+    currentBlock.data.then((data) => {
+      const newBlock = BlockManager.insert({
+        tool: toolName,
+        data: { text: data.text },
+        replace: true,
+      });
 
-    /**
-     * Apply callback before inserting html
-     */
-    newBlock.call(BlockToolAPI.APPEND_CALLBACK);
+      /**
+       * Apply callback before inserting html
+       */
+      newBlock.call(BlockToolAPI.APPEND_CALLBACK);
 
-    this.Editor.Caret.setToBlock(newBlock);
+      this.Editor.Caret.setToBlock(newBlock);
 
-    /** If new block doesn't contain inpus, insert new paragraph above */
-    if (newBlock.inputs.length === 0) {
-      if (newBlock === BlockManager.lastBlock) {
-        BlockManager.insertAtEnd();
-        Caret.setToBlock(BlockManager.lastBlock);
-      } else {
-        Caret.setToBlock(BlockManager.nextBlock);
+      /** If new block doesn't contain inpus, insert new paragraph above */
+      if (newBlock.inputs.length === 0) {
+        if (newBlock === BlockManager.lastBlock) {
+          BlockManager.insertAtEnd();
+          Caret.setToBlock(BlockManager.lastBlock);
+        } else {
+          Caret.setToBlock(BlockManager.nextBlock);
+        }
       }
-    }
 
-    /**
-     * close toolbar when node is changed
-     */
-    this.Editor.Toolbar.close();
+      /**
+       * close toolbar when node is changed
+       */
+      this.Editor.Toolbar.close();
+    })
+
   }
 }

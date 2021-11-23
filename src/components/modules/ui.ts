@@ -648,7 +648,7 @@ export default class UI extends Module<UINodes> {
     /**
      * Hide the Plus Button
      */
-    this.Editor.Toolbar.plusButton.hide();
+    this.Editor.Toolbar.plusButton.show();
   }
 
   /**
