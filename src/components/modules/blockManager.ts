@@ -124,7 +124,13 @@ export default class BlockManager extends Module {
       return null;
     }
 
-    return this._blocks[this.currentBlockIndex - 1];
+    let previous = this._blocks[this.currentBlockIndex - 1];
+
+    if (previous.name === 'page') {
+      previous = this._blocks[this.currentBlockIndex - 2];
+    }
+
+    return previous;
   }
 
   /**
@@ -424,18 +430,16 @@ export default class BlockManager extends Module {
   public async mergeBlocks(targetBlock: Block, blockToMerge: Block): Promise<void> {
     const blockToMergeIndex = this._blocks.indexOf(blockToMerge);
 
-    if (blockToMerge.isEmpty) {
-      return;
+    if (!blockToMerge.isEmpty) {
+      const blockToMergeData = await blockToMerge.data;
+
+      if (!_.isEmpty(blockToMergeData)) {
+        await targetBlock.mergeWith(blockToMergeData);
+      }
     }
-
-    const blockToMergeData = await blockToMerge.data;
-
-    if (!_.isEmpty(blockToMergeData)) {
-      await targetBlock.mergeWith(blockToMergeData);
-    }
-
     this.removeBlock(blockToMergeIndex);
     this.currentBlockIndex = this._blocks.indexOf(targetBlock);
+    this.blockDidMutated(BlockMutationType.Changed, targetBlock);
   }
 
   /**

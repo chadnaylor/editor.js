@@ -25,7 +25,7 @@ export default class Caret extends Module {
    * @static
    * @returns {{START: string, END: string, DEFAULT: string}}
    */
-  public get positions(): {START: string; END: string; DEFAULT: string} {
+  public get positions(): { START: string; END: string; DEFAULT: string } {
     return {
       START: 'start',
       END: 'end',
@@ -36,7 +36,7 @@ export default class Caret extends Module {
   /**
    * Elements styles that can be useful for Caret Module
    */
-  private static get CSS(): {shadowCaret: string} {
+  private static get CSS(): { shadowCaret: string } {
     return {
       shadowCaret: 'cdx-shadow-caret',
     };
@@ -345,7 +345,7 @@ export default class Caret extends Module {
   /**
    * Extract content fragment of current Block from Caret position to the end of the Block
    */
-  public extractFragmentFromCaretPosition(): void|DocumentFragment {
+  public extractFragmentFromCaretPosition(): void | DocumentFragment {
     const selection = Selection.get();
 
     if (selection.rangeCount) {
@@ -442,7 +442,7 @@ export default class Caret extends Module {
    * @returns {boolean}
    */
   public navigatePrevious(): boolean {
-    const { currentBlock, previousContentfulBlock } = this.Editor.BlockManager;
+    const { currentBlock, previousBlock } = this.Editor.BlockManager;
 
     if (!currentBlock) {
       return false;
@@ -450,14 +450,14 @@ export default class Caret extends Module {
 
     const { previousInput } = currentBlock;
 
-    if (!previousContentfulBlock && !previousInput) {
+    if (!previousBlock && !previousInput) {
       return false;
     }
 
     if (this.isAtStart) {
       /** If previous Tool`s input exists, focus on it. Otherwise set caret to the previous Block */
       if (!previousInput) {
-        this.setToBlock(previousContentfulBlock, this.positions.END);
+        this.setToBlock(previousBlock, this.positions.END);
       } else {
         this.setToInput(previousInput, this.positions.END);
       }

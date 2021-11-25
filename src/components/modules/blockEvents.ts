@@ -226,8 +226,6 @@ export default class BlockEvents extends Module {
       return;
     }
 
-
-
     /**
      * Opened Toolbars uses Flipper with own Enter handling
      * Allow split block when no one button in Flipper is focused
@@ -299,7 +297,7 @@ export default class BlockEvents extends Module {
 
       const index = BlockManager.currentBlockIndex;
 
-      if (BlockManager.previousBlock && BlockManager.previousBlock.inputs.length === 0) {
+      if (BlockManager.previousBlock && (BlockManager.previousBlock.inputs.length === 0 || BlockManager.previousBlock.isEmpty)) {
         /** If previous block doesn't contain inputs, remove it */
         BlockManager.removeBlock(index - 1);
       } else {
@@ -382,7 +380,6 @@ export default class BlockEvents extends Module {
 
       return;
     }
-
     Caret.createShadow(targetBlock.pluginsContent);
     BlockManager.mergeBlocks(targetBlock, blockToMerge)
       .then(() => {
