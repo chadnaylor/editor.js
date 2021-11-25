@@ -52,7 +52,7 @@ interface BlockConstructorOptions {
   /**
    * Tunes data for current Block
    */
-  tunesData: {[name: string]: BlockTuneData};
+  tunesData: { [name: string]: BlockTuneData };
 }
 
 /**
@@ -98,7 +98,7 @@ export default class Block extends EventsDispatcher<BlockEvents> {
    *
    * @returns {{wrapper: string, content: string}}
    */
-  public static get CSS(): {[name: string]: string} {
+  public static get CSS(): { [name: string]: string } {
     return {
       wrapper: 'ce-block',
       wrapperStretched: 'ce-block--stretched',
@@ -170,7 +170,7 @@ export default class Block extends EventsDispatcher<BlockEvents> {
    * If there is saved data for Tune which is not available at the moment,
    * we will store it here and provide back on save so data is not lost
    */
-  private unavailableTunesData: {[name: string]: BlockTuneData} = {};
+  private unavailableTunesData: { [name: string]: BlockTuneData } = {};
 
   /**
    * Editor`s API module
@@ -521,7 +521,7 @@ export default class Block extends EventsDispatcher<BlockEvents> {
       for (let child = blockContentNodes.childNodes.length - 1; child >= 0; child--) {
         const contentNode = blockContentNodes.childNodes[child];
 
-        if (!$.isExtensionNode(contentNode)) {
+        if (!(contentNode as HTMLElement).classList.contains('autocomplete-items') && !$.isExtensionNode(contentNode)) {
           return contentNode as HTMLElement;
         }
       }
@@ -575,9 +575,9 @@ export default class Block extends EventsDispatcher<BlockEvents> {
    *
    * @returns {object}
    */
-  public async save(): Promise<void|SavedData> {
+  public async save(): Promise<void | SavedData> {
     const extractedBlock = await this.toolInstance.save(this.pluginsContent as HTMLElement);
-    const tunesData: {[name: string]: BlockTuneData} = this.unavailableTunesData;
+    const tunesData: { [name: string]: BlockTuneData } = this.unavailableTunesData;
 
     [
       ...this.tunesInstances.entries(),
@@ -706,7 +706,7 @@ export default class Block extends EventsDispatcher<BlockEvents> {
    * Allows to say Editor that Block was changed. Used to manually trigger Editor's 'onChange' callback
    * Can be useful for block changes invisible for editor core.
    */
-  public dispatchChange(): void{
+  public dispatchChange(): void {
     this.didMutated();
   }
 
@@ -737,8 +737,8 @@ export default class Block extends EventsDispatcher<BlockEvents> {
    */
   private compose(): HTMLDivElement {
     const wrapper = $.make('div', Block.CSS.wrapper) as HTMLDivElement,
-        contentNode = $.make('div', Block.CSS.content),
-        pluginsContent = this.toolInstance.render();
+      contentNode = $.make('div', Block.CSS.content),
+      pluginsContent = this.toolInstance.render();
 
     contentNode.appendChild(pluginsContent);
 
@@ -775,7 +775,7 @@ export default class Block extends EventsDispatcher<BlockEvents> {
    * @param tunesData - current Block tunes data
    * @private
    */
-  private composeTunes(tunesData: {[name: string]: BlockTuneData}): void {
+  private composeTunes(tunesData: { [name: string]: BlockTuneData }): void {
     Array.from(this.tunes.values()).forEach((tune) => {
       const collection = tune.isInternal ? this.defaultTunesInstances : this.tunesInstances;
 

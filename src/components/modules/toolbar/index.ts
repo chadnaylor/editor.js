@@ -137,10 +137,11 @@ export default class Toolbar extends Module<ToolbarNodes> {
     return {
       hide: (): void => this.nodes.plusButton.classList.add(this.CSS.plusButtonHidden),
       show: (): void => {
+        const current = this.Editor.BlockManager.currentBlock;
+
         if (this.Editor.Toolbox.isEmpty) {
           return;
         }
-        const current = this.Editor.BlockManager.currentBlock;
         const name = I18n.t(I18nInternalNS.toolNames, current.tool.toolbox.title || current.name);
 
         this.nodes.plusButton.innerHTML = current.tool.toolbox.icon;
