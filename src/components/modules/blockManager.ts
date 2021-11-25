@@ -113,6 +113,15 @@ export default class BlockManager extends Module {
   }
 
   /**
+ * Returns previous Block index
+ *
+ * @returns {number}
+ */
+  public get previousBlockIndex(): number {
+    return this.currentBlockIndex - (this._blocks[this.currentBlockIndex - 1].name === 'page' ? 2 : 1);
+  }
+
+  /**
    * Returns previous Block instance
    *
    * @returns {Block|null}
@@ -124,13 +133,7 @@ export default class BlockManager extends Module {
       return null;
     }
 
-    let previous = this._blocks[this.currentBlockIndex - 1];
-
-    if (previous.name === 'page') {
-      previous = this._blocks[this.currentBlockIndex - 2];
-    }
-
-    return previous;
+    return this._blocks[this.previousBlockIndex];
   }
 
   /**

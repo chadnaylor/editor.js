@@ -288,6 +288,7 @@ export default class BlockEvents extends Module {
     const { BlockManager, BlockSelection, Caret } = this.Editor;
     const currentBlock = BlockManager.currentBlock;
     const tool = currentBlock.tool;
+    const index = BlockManager.currentBlockIndex;
 
     /**
      * Check if Block should be removed by current Backspace keydown
@@ -295,11 +296,13 @@ export default class BlockEvents extends Module {
     if (currentBlock.selected || (currentBlock.isEmpty && currentBlock.currentInput === currentBlock.firstInput)) {
       event.preventDefault();
 
-      const index = BlockManager.currentBlockIndex;
-
       if (BlockManager.previousBlock && (BlockManager.previousBlock.inputs.length === 0 || BlockManager.previousBlock.isEmpty)) {
         /** If previous block doesn't contain inputs, remove it */
-        BlockManager.removeBlock(index - 1);
+        const prevIndex = BlockManager.previousBlockIndex;
+
+        BlockManager.removeBlock(prevIndex);
+        BlockManager.move(prevIndex);
+        Caret.setToBlock(currentBlock, Caret.positions.START);
       } else {
         /** If block is empty, just remove it */
         BlockManager.removeBlock();
@@ -340,7 +343,16 @@ export default class BlockEvents extends Module {
        * preventing browser default behaviour
        */
       event.preventDefault();
+      if (BlockManager.previousBlock.isEmpty) {
+        /** If previous block doesn't contain inputs, remove it */
+        const prevIndex = BlockManager.previousBlockIndex;
 
+        BlockManager.removeBlock(prevIndex);
+        BlockManager.move(prevIndex);
+        Caret.setToBlock(currentBlock, Caret.positions.START);
+
+        return;
+      }
       /**
        * Merge Blocks
        */
