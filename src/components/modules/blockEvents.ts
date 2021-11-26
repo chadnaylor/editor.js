@@ -306,6 +306,7 @@ export default class BlockEvents extends Module {
       } else {
         /** If block is empty, just remove it */
         BlockManager.removeBlock();
+        // Caret.setToBlock(BlockManager.previousBlock, Caret.positions.END);
       }
 
       Caret.setToBlock(

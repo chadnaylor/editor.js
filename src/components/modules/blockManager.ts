@@ -118,6 +118,8 @@ export default class BlockManager extends Module {
  * @returns {number}
  */
   public get previousBlockIndex(): number {
+    _.log(`Previous block is ${this._blocks[this.currentBlockIndex - 1].name}, using index ${this._blocks[this.currentBlockIndex - 1].name === 'page' ? 2 : 1} spots back`);
+
     return this.currentBlockIndex - (this._blocks[this.currentBlockIndex - 1].name === 'page' ? 2 : 1);
   }
 
