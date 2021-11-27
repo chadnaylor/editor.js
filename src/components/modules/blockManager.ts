@@ -537,7 +537,7 @@ export default class BlockManager extends Module {
   public split(): Block {
     const extractedFragment = this.Editor.Caret.extractFragmentFromCaretPosition();
     const wrapper = $.make('div');
-    const tool = this.currentBlock.name;
+    const tool = this.currentBlock.config.next ? this.currentBlock.config.next : this.config.defaultBlock;
 
     wrapper.appendChild(extractedFragment as DocumentFragment);
 
