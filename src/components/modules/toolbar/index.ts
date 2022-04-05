@@ -223,8 +223,8 @@ export default class Toolbar extends Module<ToolbarNodes> {
      * 2) On mobile — Toolbar at the bottom of Block
      */
     if (!isMobile) {
-      const contentOffset = Math.floor(blockHeight / 2);
-
+      const contentOffset = Math.floor(blockHeight - 10);
+      this.nodes.actions.style.transform = `translate3d(0, calc(${contentOffset}px - 50%), 0)`;
       this.nodes.plusButton.style.transform = `translate3d(0, calc(${contentOffset}px - 50%), 0)`;
       this.Editor.Toolbox.nodes.toolbox.style.transform = `translate3d(0, calc(${contentOffset}px - 50%), 0)`;
     } else {
