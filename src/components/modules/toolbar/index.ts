@@ -104,7 +104,7 @@ export default class Toolbar extends Module<ToolbarNodes> {
       toolbar: 'ce-toolbar',
       content: 'ce-toolbar__content',
       actions: 'ce-toolbar__actions',
-      actionsOpened: 'ce-toolbar--opened',
+      actionsOpened: 'ce-toolbar__actions--opened',
 
       toolbarOpened: 'ce-toolbar--opened',
 
