@@ -5,7 +5,7 @@
 3. Allow merge of different block types
 4. Keep block type on enter and split
 5. Allow conversion of existing blocks via toolbox, plus button stays open
-
+6. Add delete button.
 
 <a href="https://editorjs.io/"><p align="center"><img src="https://capella.pics/79ce946a-d636-41cd-aa96-d3bc5ecfde03.jpg"></p></a>
 

@@ -265,7 +265,7 @@ export default class BlockEvents extends Module {
       /**
        * Show Toolbar
        */
-      this.Editor.Toolbar.open(false);
+      this.Editor.Toolbar.open(true);
 
       /**
        * Show Plus Button
@@ -559,7 +559,7 @@ export default class BlockEvents extends Module {
    */
   private activateToolbox(): void {
     if (!this.Editor.Toolbar.opened) {
-      this.Editor.Toolbar.open(false, false);
+      this.Editor.Toolbar.open(true, false);
     }
     this.Editor.Toolbar.plusButton.show();
 
