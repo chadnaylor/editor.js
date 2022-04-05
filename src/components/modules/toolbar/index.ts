@@ -104,7 +104,7 @@ export default class Toolbar extends Module<ToolbarNodes> {
       toolbar: 'ce-toolbar',
       content: 'ce-toolbar__content',
       actions: 'ce-toolbar__actions',
-      actionsOpened: 'ce-toolbar__actions--opened',
+      actionsOpened: 'ce-toolbar--opened',
 
       toolbarOpened: 'ce-toolbar--opened',
 
@@ -247,7 +247,7 @@ export default class Toolbar extends Module<ToolbarNodes> {
    *                                      with closing Toolbox and Block Settings
    *                                      This flag allows to open Toolbar with Toolbox
    */
-  public open(withBlockActions = false, needToCloseToolbox = true): void {
+  public open(withBlockActions = true, needToCloseToolbox = true): void {
     _.delay(() => {
       this.move(needToCloseToolbox);
       this.nodes.wrapper.classList.add(this.CSS.toolbarOpened);
